@@ -5,7 +5,7 @@ This repository contains the implementation of the **Dual-domain Gradient fusion
 
 # Attack Process of D2gFFT
 
-https://github.com/Gitwanmeng/D2gFFT/blob/main/adv_imgs/lc.png
+![https://github.com/Gitwanmeng/D2gFFT/blob/main/adv_imgs/lc.png](https://github.com/Gitwanmeng/D2gFFT/blob/main/adv_imgs/lc.png)
 
 This figure shows the process of the D2gFFT method, which first obtains adversarial samples through baseline attacks, then masks the frequency and space separately to obtain gradients, fuses the dual domain gradients to obtain fused gradients, and finally fine tunes the feature space to generate more transferable adversarial samples
 
