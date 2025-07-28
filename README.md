@@ -41,5 +41,4 @@ The 1000 images are from the NIPS 2017 ImageNet-Compatible dataset. [official re
 
 # Experimental Setup
 
-In our empirical evaluations, the D2gFFT method was tested on several popular architectures, including **Inception-v3**, **ResNet-50**, using the **ImageNet dataset**. The primary metric for evaluating attack performance was the **Attack Success Rate (ASR)**, which quantifies the percentage of adversarial examples that successfully mislead the target model.
-
+In our empirical evaluations, the D2gFFT method was tested on several popular architectures, including **Inception-v3**, **ResNet-50**,**VGG16** and **Res50adv**, this experiment compares it with two fine-tuning strategies: AaF, FFT.and five simple target attack baseline methods: CE, Logit, Margin, SH, and SU to compare the performance of adversarial samples. Additionally, a comparison is made with the transferable attack method TTP, and all selection schemes start from TMDI(Combination of DI, TI and MI).
