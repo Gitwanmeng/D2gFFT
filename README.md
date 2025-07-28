@@ -1,26 +1,45 @@
-# Avg_FT
-Codes for our paper to 2025ICASSP: Two Heads Are Better Than One: Averaging along Fine-Tuning to Improve Targeted Transferability. [arXiv](https://arxiv.org/abs/2412.20807)
+# D2gFFT:Enhancing the targeted transferability of adversarial examples with dual domain gradient fusion fine-tuning
+# Abstract
 
-Our key assumption is that an AE located at the center of high-confidence (w.r.t. y<sub>t</sub>) region may transfer better across unknown models than that located near the boundary of the high-confidence region. As shown in below, without cherry-picking, the proposed AaF steers AE towards a more central region than FFT, let alone the baseline attack (I'). The AEs are crafted with a Resnet50 (source model), while the planes are calculated on an ensemble of target models. 
+This repository contains the implementation of the **Dual-domain Gradient fusion fine-tuning Attack (D2gFFT)**, a Dual-Domain Gradient Fusion Fine-tuning (D2gFFT) method is proposed to enhance the transferability of adversarial samples. Specifically, the Discrete Cosine Transform(DCT) is used to transform the original and the adversarial samples from the spatial domain to the frequency domain, while the frequency perturbation strategy is designed to change the frequency characteristics of the samples and restore them to the spatial domain via the Inverse Discrete Cosine Transform(IDCT). Then, the gradient information in the spatial and frequency domains are fused and these fused gradients are used as a guide to fine-tune the feature layers of the model to generate the adversarial samples.
 
-<img src="results/loss_surface/919_01.png" width="250"><img src="results/loss_surface/919_02.png" width="250"><img src="results/loss_surface/919_03.png" width="250">  
+# Attack Process of D2gFFT
 
-<img src="results/loss_surface/919_04.png" width="250"><img src="results/loss_surface/919_05.png" width="250"><img src="results/loss_surface/919_06.png" width="250">  
+![lc](C:\Users\Hsy\OneDrive\桌面\八股文\Java八股完整版by小紫日记\image\lc.png)
 
-<img src="results/loss_surface/919_07.png" width="250"><img src="results/loss_surface/919_08.png" width="250"><img src="results/loss_surface/919_09.png" width="250">
+This figure shows the process of the D2gFFT method, which first obtains adversarial samples through baseline attacks, then masks the frequency and space separately to obtain gradients, fuses the dual domain gradients to obtain fused gradients, and finally fine tunes the feature space to generate more transferable adversarial samples
 
-In the supplementary file 'supp.pdf', we provide more detailed results:
+# Requiremens
+To run this code,the following dependencies are required:
 
-- Pseudo-code of the proposed method;
-- Ablation study on the decaying factor gamma;
-- Visualization of FFT and AaF in a 2D subspace;
-- Attack performance against four transformer-based models;
-- Attack performance in the most difficult-target scenario; 
-- Visual comparison. 
+- Python 3.x
+- PyTorch (>= 1.10.0)
+- Numpy
+- Torchvision
+- pillow
+- Matplotlib
 
-## Usage
-Please run main_Avg_FT.py to see the targeted transferability improvement by the proposed AaF method.
+# Usage
 
+## Baseline Attack
 
+To execute the baseline attack，use the following command:
 
+`python Logit_Attack.py`
+
+This will generate baseline adversarial samples（Logit）
+
+## Fine-Tuning Attack
+
+To execute the D2gFFT attack and verify the effectiveness of the attack, you can use the following command:
+
+`python main_Feature_FT.py`
+
+# Dateset
+
+The 1000 images are from the NIPS 2017 ImageNet-Compatible dataset. [official repository](https://github.com/cleverhans-lab/cleverhans/tree/master/cleverhans_v3.1.0/examples/nips17_adversarial_competition/dataset) or [Zhao's Github](https://github.com/ZhengyuZhao/Targeted-Tansfer/tree/main/dataset).
+
+# Experimental Setup
+
+In our empirical evaluations, the D2gFFT method was tested on several popular architectures, including **Inception-v3**, **ResNet-50**, using the **ImageNet dataset**. The primary metric for evaluating attack performance was the **Attack Success Rate (ASR)**, which quantifies the percentage of adversarial examples that successfully mislead the target model.
 
