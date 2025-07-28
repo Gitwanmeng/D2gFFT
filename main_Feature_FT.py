@@ -29,7 +29,7 @@ def setup_seed(seed):
     torch.backends.cudnn.deterministic = True
 setup_seed(42)
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-# load model # load pretrained model，
+# load model # load pretrained model＄1�7
 # modify it to the dir of the pretrained model in your computer
 # checkpt_dir = 'C://Users/86188/.cache/torch/hub/checkpoints/'
 # checkpt_dir = '/root/.cache/torch/hub/checkpoints/'
@@ -74,7 +74,7 @@ image_id_list, label_ori_list, label_tar_list = load_ground_truth('images.csv')
 model = ResNet50(num_classes=1000)
 # 加载 .ckpt 文件
 checkpoint = torch.load('resnet50_l2_eps0.01.ckpt')
-# 提取模型权重部分（假设需要的是主模型部分）
+# 提取模型权重部分（假设需要的是主模型部分＄1�7
 state_dict = checkpoint['model']
 
 # 删除 "module.model." 前缀
@@ -85,7 +85,7 @@ for k, v in state_dict.items():
         name = k[13:]  # 去掉 "module.model."
         new_state_dict[name] = v
     else:
-        # 如果还有其他前缀（如 attacker），根据需求决定是否保留
+        # 如果还有其他前缀（如 attacker），根据霢�求决定是否保畄1�7
         continue
 # 将模型参数加载到定义的模型中
 model.load_state_dict(new_state_dict)
@@ -142,7 +142,7 @@ for k in range(0, 200):
     # X_adv_ft_our = attack_our.perturb(X_cln, X_adv160, labels_tar, labels_ori)
     # attack_AFT = AaFAttack(model=model, device=device, epsilon=16 / 255., k=10)
     # X_adv_Aft = attack_AFT.perturb(X_cln, X_adv160, labels_tar, labels_ori)
-    attackFAFT = FeatureFAFT(model=model, device=device, epsilon=16 / 255., k=10)
+    attackFAFT = FeatureD2gFFT(model=model, device=device, epsilon=16 / 255., k=10)
     X_adv_Faft = attackFAFT.perturb(X_cln, X_adv160, labels_tar, labels_ori)
     #### 3. verify  before fine-tune ####
     X_adv_norm = norm(X_adv).detach()
